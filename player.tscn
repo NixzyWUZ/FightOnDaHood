@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://db7v7v3b8nbnq"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8w8k1"]
+[ext_resource type="Texture2D" uid="uid://dp4o0tpslmjhf" path="res://sprites_animations/player/Idle1.png" id="1_s6e3k"]
+[ext_resource type="Texture2D" uid="uid://d3y5hit2bxff7" path="res://sprites_animations/player/Idle2.png" id="2_bpapc"]
+[ext_resource type="Texture2D" uid="uid://7qtxfb1v38yo" path="res://sprites_animations/player/wak1.png" id="3_xap63"]
+[ext_resource type="Texture2D" uid="uid://v1nfeks4nx73" path="res://sprites_animations/player/walk2.png" id="4_8sh35"]
+[ext_resource type="Texture2D" uid="uid://bt5i84kqg5ngu" path="res://sprites_animations/player/walk3.png" id="5_cseir"]
+[ext_resource type="Texture2D" uid="uid://qvs8exteib8r" path="res://sprites_animations/player/walk4.png" id="6_w3mmb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j374m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s6e3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bpapc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xap63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8sh35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cseir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_w3mmb")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxk3w"]
+size = Vector2(24, 103.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kwatv"]
+radius = 40.0
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(79, 417)
+collision_layer = 3
+script = ExtResource("1_8w8k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.5, 19.5)
+scale = Vector2(0.825, 0.735714)
+sprite_frames = SubResource("SpriteFrames_j374m")
+animation = &"run"
+autoplay = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-3, 19.25)
+shape = SubResource("RectangleShape2D_yxk3w")
+debug_color = Color(0.798246, 0.958695, 1, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.8, 1.8)
+limit_left = 0
+limit_bottom = 640
+
+[node name="player_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+position = Vector2(-2, 18)
+shape = SubResource("CircleShape2D_kwatv")
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]

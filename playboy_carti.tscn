@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://i557el2w0np8"]
+
+[ext_resource type="Texture2D" uid="uid://ssak31k870s6" path="res://sprites_animations/PLaboy_CartiS2.png" id="1_bvn2s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apo0r"]
+atlas = ExtResource("1_bvn2s")
+region = Rect2(0, 0, 44, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd1x0"]
+atlas = ExtResource("1_bvn2s")
+region = Rect2(44, 0, 44, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_47wth"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apo0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd1x0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iakf5"]
+size = Vector2(24, 72)
+
+[node name="K1ng V3mp" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_47wth")
+autoplay = "default"
+frame_progress = 0.0288524
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -44)
+shape = SubResource("RectangleShape2D_iakf5")
